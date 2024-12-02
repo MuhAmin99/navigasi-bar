@@ -1,0 +1,188 @@
+/* reset css */
+*{
+    padding: 0; /* hapus padding */
+    margin: 0; /* hapus margin */
+    box-sizing: border-box;
+}
+
+body{
+    height: 1000px; /* ngasih tinggi untuk tag body supaya bisa di scroll */
+}
+
+/* styling header  */
+header {
+    width: 100%;
+    height: 60px;
+    display: flex; /* agar element di dalam header dapat diatur */
+    justify-content: space-between;  /* mengatur peletakan content didalam header */
+    align-items: center; /* mengatur element secara vertikal di tengah header */
+    padding: 2px 4rem; /* memberikan jarak antara pinggiran header dengan element di dalamnya */
+    background-color: #212121;
+    position: fixed; /* agar posisi tetap pada posisinya meskipun di scroll */
+}
+
+/* styling logo */
+.logo {
+    color: #fff;
+    font-size: 2rem;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+/* styling tag <input>  */
+input {
+    display: none; /* dihilangkan */
+}
+
+/* styling <label> untuk button */
+.button-open {
+    display: none;  /* dihilangkan sementara */
+    justify-content: center; /* mengatur penempatan element di dalamnya berada tepat di tengah secara horizontal */
+    align-items: center;  /* mengatur secara vertical */
+    flex-direction: column; /* berjejer ke bawah */
+    gap: 1.6px; /* jarak antar element */
+    position: absolute; /* supaya  keluar dari element pembungkusnya yaitu tag <header> */
+    right: 3rem; /* supaya berada di sebelah kanan dengan jarak 3rem */
+    cursor: pointer; /* supaya cursor berbentuk tangan */
+}
+/* styling div dengan class .bar agar menjadi icon */
+.bar {
+    width: 20px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+/* styling menu navigasi  */
+.menu-navigasi {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    list-style: none; /* hilangkan list bullet */
+}
+
+.menu-navigasi .menu-items a {
+    color: #fff;
+    text-decoration: none; /* hilangkan underline */
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    transition: all .4s ease-in-out; /* berikan transisi ketika menu di hover */
+}
+/*  styling ketika di hover */
+.menu-navigasi .menu-items .text:hover {
+    color: #6e6e6e;
+}
+
+/* styling img di dalam class .menu-items */
+.menu-items img {
+    display: none; /* hilangkan sementara */
+}
+
+/* responsif menu, menu akan muncul di lebar layar 768px */
+@media screen and (max-width: 768px) {
+
+    /* styling tag <label> untuk button */
+    .button-open {
+        display: flex; /*tampilkan kembali */
+    }
+    /* styling class .bar didalam tag <label> */
+    .button-open .bar {
+        transition: .3s cubic-bezier(0.53, -0.45, 0.55, 1.55); /* berikan transisi untuk pergerakan icon atau class .bar */
+    }
+
+    /* jika .btn-trigger aktif maka berikan transform kepada anak pertama dalam class .bar */
+    .btn-trigger:checked ~ .button-open .bar:nth-child(1) {
+        /* agar terjadi perubahan rotasi -45 derajat, turun 7px dan geser ke kiri 1px */
+        transform: rotate(-45deg) translateY(7px) translateX(-1px);
+    }
+    
+    /* jika .btn-trigger aktif maka berikan opacity kepada anak kedua dalam class .bar */
+    .btn-trigger:checked ~ .button-open .bar:nth-child(2) {
+        /* agar transparan */
+        opacity: 0;
+    }
+    /* jika .btn-trigger aktif maka berikan transform kepada anak ketiga dalam class .bar */
+    .btn-trigger:checked ~ .button-open .bar:nth-child(3) {
+        /* agar terjadi perubahan rotasi 45 derajat, naik 7px dan geser ke kiri 1px */
+        transform: rotate(45deg) translateY(-7px) translateX(-1px);
+    }
+/* ========================================================================================================================= */
+    
+    /* styling img di dalam class .menu-items */
+    .menu-items img {
+        display: block; /* tampilkan */
+    }
+
+    /* styling class text didalam .menu-items */
+    .menu-items .text {
+        display: none; /* hilangkan*/
+    }
+    /* styling navigasi menu */
+    nav {
+        width: 0; /* lebar default 0 */
+        position: absolute;
+        top: 70px; /* jarak dari atas sebesar 70px */
+        left: 50%; /*jarak dari kiri */
+        border-radius: 20px;
+        transform: translateX(-50%); /* atur dari sumbu X */
+        background-color: #212121;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* agar item yang keluar dari element pembungkus hilang */
+        visibility: hidden; /* agar tidak terlihat */
+        opacity: 0; /* transparansi */
+        transition: all .3s cubic-bezier(0.55, -0.85, 0.68, 1.53); /* transisi */
+    }
+    /* ketika .btn-trigger aktif maka berika perubahan pada tag <nav> */
+    .btn-trigger:checked ~ nav {
+        width: 50%; /* lebar awal 0 menjadi 50% */
+        visibility: visible; /* tampilkan */
+        opacity: 1; 
+    }
+    /* style default ketika layar berada di 768px */
+    .menu-navigasi {
+        width: 100%;
+        height: 30px;
+        justify-content: center;
+        gap: 3.5rem;
+        
+    }
+    /* style .menu-items di dalam class .menu-navigasi */
+    .menu-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateX(-180px); /* geser ke sebelah kiri */
+        transition: .3s ease-in;
+    }
+
+    /* ketika .btn-trigger aktif maka berikan perubahan pada .menu-items didalam class .menu-navigasi yang ada di dalam tag <nav> */
+    .btn-trigger:checked ~ nav .menu-navigasi .menu-items {
+        transform: none; /* nilai awal -180px diubah menjadi none ketika .btn-trigger aktif */
+        opacity: 1; /* nilai awal 0 menjadi 1 ketika .btn-trigger aktif */
+    }
+    /* berikan delay transisi kepada anak pertama di dalam class .menu-items */
+    .menu-items:nth-child(1) {
+        transition-delay: .4s;
+    }
+    /* berikan delay transisi kepada anak kedua di dalam class .menu-items */
+    .menu-items:nth-child(2) {
+        transition-delay: .3s;
+    }
+    /* berikan delay transisi kepada anak ketiga di dalam class .menu-items */
+    .menu-items:nth-child(3) {
+        transition-delay: .2s;
+    }
+    /* berikan delay transisi kepada anak keempat di dalam class .menu-items */
+    .menu-items:nth-child(4) {
+        transition-delay: .1s;
+    }
+
+   
+
+
+
+    
+}
